@@ -2,6 +2,7 @@ import Banner from '../../components/Banner/Banner';
 import Team from '../../components/Team';
 import Brands from './../../components/brands/Brands';
 import ShopFAQAccordion from './../../components/ShopFAQAccordion';
+import Subcriptions from './../../components/Subcriptions';
 
 
 const Home = () => {
@@ -9,8 +10,9 @@ const Home = () => {
         <div>
              <Banner></Banner>
             <Brands></Brands>
-            <Team></Team>
             <ShopFAQAccordion></ShopFAQAccordion>
+            <Team></Team>
+            <Subcriptions></Subcriptions>
         </div>
     );
 };
