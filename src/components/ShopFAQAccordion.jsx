@@ -33,10 +33,10 @@ function ShopFAQAccordion() {
             checked={index === selectedQuestion}
             onChange={() => handleQuestionChange(index)}
           />
-          <div className="collapse-title text-xl font-medium">
+          <div className=" text-xl font-medium">
             {faq.question}
           </div>
-          <div className="collapse-content">
+          <div className="text-black">
             <p>{faq.answer}</p>
           </div>
         </div>
