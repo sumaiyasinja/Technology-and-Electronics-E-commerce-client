@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
-    // const axiosPublic = useAxiosPublic(); topost cookies
+    const axiosPublic = useAxiosPublic(); 
 
 
   const loginWithGoogle = () => {
@@ -29,24 +29,24 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log(currentUser);
       setLoading(false);
-      const userEmail = currentUser?.email || user?.email;
-      const userInfo = { email: userEmail };
+      // const userEmail = currentUser?.email || user?.email;
+      // const userInfo = { email: userEmail };
 
-      if (currentUser) {
-        useAxiosPublic.post("/jwt", userInfo).then((res) => {
-          if (res.data.token) {
-            localStorage.setItem("access-token", res.data.token);
-          }
-        });
-      } else {
-        localStorage.removeItem("access-token");
-      }
+      // if (currentUser) {
+      //   axiosPublic.post("/jwt", userInfo).then((res) => {
+      //     if (res.data.token) {
+      //       localStorage.setItem("access-token", res.data.token);
+      //     }
+      //   });
+      // } else {
+      //   localStorage.removeItem("access-token");
+      // }
       setLoading(false);
     });
     return () => {
       unsubscribe();
     };
-  }, [user])
+  }, [])
 
   const authProperties = {
     user,

@@ -1,12 +1,16 @@
+import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2'
-// import useAxiosPublic from './../../hooks/useAxiosPublic';
+import { useParams } from 'react-router-dom';
+import useAxiosPublic from './../../hooks/useAxiosPublic';
 
+const UpdateProduct = () => {
+  const { id } = useParams();
+  const loadedProduct = useLoaderData();
+  const axiosPublic = useAxiosPublic()
 
-const AddProduct = () => {
-    
-  // const axiosPublic = useAxiosPublic()
+  console.log(loadedProduct,id)
 
-    const handleAddProduct = event => {
+    const handleUpdateProduct = event => {
         event.preventDefault();
 
         const form = event.target;
@@ -19,39 +23,45 @@ const AddProduct = () => {
         const description = form.description.value;
         const photo = form.photo.value;
 
-        const newProduct = { name, price, rating,brands,types, description,photo}
+        const updatedProduct = { name, price, rating,brands,types, description,photo}
 
-        console.log(newProduct);
+        console.log(updatedProduct);
 
-        fetch('https://bytopia-tech-shop-server.vercel.app/products', {
-          method: 'POST',
-          headers: {
-              'content-type': 'application/json'
-          },
-          body: JSON.stringify(newProduct)
-      })
-      .then(res => res.json())
-      .then(data => {
-          console.log(data)
-          
-          if(data.insertedId){
+
+        fetch(`https://bytopia-tech-shop-server.vercel.app/products/${id}`, {
+          method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedProduct)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
               Swal.fire({
-                  title: 'Success!',
-                  text: 'Product Added Successfully',
-                  icon: 'success',
-                  confirmButtonText: 'Superb'
-                })
-                form.reset()
-          }
-      })
-  }
-  return (
-    <section className="bg-white dark:bg-gray-900 pt-14">
+                title: 'Updated Sucessfully!',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
+              })
+            }
+            history.back();
+        })
+}
+
+    
+      
+    return (
+      <section className="bg-white dark:bg-gray-900 pt-14">
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-6">
         <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white py-2">
-          Add a new product
+        Update a product
         </h2>
-        <form onSubmit={handleAddProduct}>
+        <form onSubmit={handleUpdateProduct}>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div className="sm:col-span-2">
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -59,6 +69,7 @@ const AddProduct = () => {
               </label>
               <input
                 type="text"
+                defaultValue={loadedProduct?.name}
                 name="name"
                 id="name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -72,78 +83,86 @@ const AddProduct = () => {
                 Brands
               </label>
               <select
+              defaultValue={loadedProduct?.brands}
                 id="brands"
                 name="brands"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option value="Apple">Apple</option>
-                <option value="Samsung">Samsung</option>
-                <option value="IBM">IBM</option>
-                <option value="others">others</option>
+                <option value="Telsa">Telsa</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes">Mercedes Benz</option>
+                <option value="Ferrari">Ferrari</option>
+                <option value="Ford">Ford</option>
+                <option value="Audi">Audi</option>
               </select>
             </div>
             <div className="w-full">
-              <label htmlFor="types" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Types
               </label>
               <input
+              defaultValue={loadedProduct?.types}
                 type="text"
                 name="types"
                 id="types"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product Types"
                 required
-              />
+                />
             </div>
             <div className="w-full">
               <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Price
               </label>
               <input
+              defaultValue={loadedProduct?.price}
                 type="number"
                 name="price"
                 id="price"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="$2999"
                 required
-              />
+                />
             </div>
-
+  
             <div className="w-full">
               <label htmlFor="rating"  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Rating
               </label>
               <input
                 type="text"
+                defaultValue={loadedProduct?.rating}
                 name="rating"
                 id="rating"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Product rating"
                 required
-              />
+                />
             </div>
             <div className="w-full">
               <label htmlFor="photo"  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 photo
               </label>
               <input
+               defaultValue={loadedProduct?.photo}
                 type="text"
                 name="photo"
                 id="photo"
-
+  
                 className=" text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                    focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5   dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Photo URL:"
                 required
-              />
+                />
               
             </div>
-
+  
                 <div className="sm:col-span-2">
               <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Description
               </label>
               <textarea
+                            defaultValue={loadedProduct?.description}
                 name="description"
                 id="description"
                 rows="8"
@@ -157,13 +176,14 @@ const AddProduct = () => {
             <input
               type="submit"
               className="font-medium mt-3 text-center text-white bg-primary-700 custom-btn px-5 py-2.5 rounded-lg focus:ring-4 "
-              value="Add product"
+              value="Update product"
             />
           </div>
         </form>
       </div>
     </section>
-  );
+    )
+
 };
 
-export default AddProduct;
+export default UpdateProduct;

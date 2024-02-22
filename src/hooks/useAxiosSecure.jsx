@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from './useAuth';
+import { useAuth } from "./useAuth";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://thedailypulse-717h5qv56-sumaiyasinja.vercel.app'
+    baseURL: 'https://bytopia-tech-shop-server.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();

@@ -1,12 +1,14 @@
-import Footer from "../../components/footer/Footer";
-import Navbar from "../../components/navbar/Navbar";
+import Banner from '../../components/Banner/Banner';
+import Brands from './../../components/brands/Brands';
+import ShopFAQAccordion from './../../components/ShopFAQAccordion';
+
 
 const Home = () => {
     return (
         <div>
-            <Navbar></Navbar>
-            hello
-            <Footer></Footer>
+             <Banner></Banner>
+            <Brands></Brands>
+            <ShopFAQAccordion></ShopFAQAccordion>
         </div>
     );
 };

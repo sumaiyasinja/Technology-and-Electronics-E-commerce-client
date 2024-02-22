@@ -3,13 +3,13 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/bytopedia-logo-sky.png";
 // import logo2 from '../../assets/img/bytopedia-logo-purple.png'
 import { useAuth } from "./../../hooks/useAuth";
-import toast from "react-hot-toast";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { auth } from "../../firebase/firebase.config";
+import toast, { Toaster } from "react-hot-toast";
+
 
 const Navbar = () => {
   const { user, loginWithGoogle, logOut } = useAuth();
   const navigate = useNavigate();
+
   const handleLogOut = () => {
     logOut();
   };
@@ -17,25 +17,6 @@ const Navbar = () => {
     loginWithGoogle()
       .then(() => {
         toast.success("Succefully logged in with google.");
-
-        const user = auth.currentUser;
-
-        const userInfo = {
-          name: user?.displayName || "no Name",
-          email: user?.email || "no Email",
-          photoURL: user?.photoURL || "null",
-        };
-        useAxiosPublic
-          .post("/users", userInfo)
-          .then((res) => {
-            if (res.data.insertedId) {
-              console.log("User added to the database");
-              toast.success("User added successfully to the database");
-            }
-          })
-          .catch((error) => {
-            toast.error(error.message);
-          });
         navigate(location.state ? location.state : "/");
       })
       .catch((e) => toast.error(e.message));
@@ -63,6 +44,7 @@ const Navbar = () => {
 
   return (
     <div className=" z-50">
+      <Toaster></Toaster>
       {/* <!-- Main navigation container --> */}
       <nav className="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
         <div className="flex w-full flex-wrap items-center justify-between px-3">

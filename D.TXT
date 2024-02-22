@@ -1,0 +1,15 @@
+[
+  {
+    "brand_name": "Apple",
+    "thumbnail_img":"https://assets.bizclikmedia.net/668/bf8b54295a0fc2a8c4fb62a35aaed06e:de73408517280d1ebe8c93024f63b94c/kisspng-apple-logo-business-clip-art-apple-logo-outline-5aaafe77583254-0626784515211557033613.webp"
+  },
+  {
+    "brand_name": "Samsung"
+    "thumbnail_img":"https://assets.bizclikmedia.net/668/d63cd64da49df06ab2ae8be1589e7dc0:1d25cefee60483828036e65bb909506a/samsung-wordmark-svg.webp"
+  },
+  {
+    "brand_name": "IBM"
+    "thumbnail_img":"https://assets.bizclikmedia.net/668/b5583f5c9e4ff538c8155b74b017961f:7d2f124d764fc9242c6dcc9da1ffac92/ibm-logo-svg.webp"
+  },
+ 
+]

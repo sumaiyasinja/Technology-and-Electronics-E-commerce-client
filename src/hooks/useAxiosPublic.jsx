@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "https://thedailypulse-717h5qv56-sumaiyasinja.vercel.app",
+  baseURL: "https://bytopia-tech-shop-server.vercel.app",
 });
 
 const useAxiosPublic = () => {
