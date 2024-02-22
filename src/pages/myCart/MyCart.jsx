@@ -15,16 +15,16 @@ const MyCart = () => {
   
 
   const ProductCard = ({ product }) => (
-    <div key={product?._id} className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div key={product?._id} className="md:px-7 px-3 rounded-lg w-72 py-3 md:py-6 bg-slate-300 shadow-xl">
       <figure>
         <img src={product?.photo} alt={product?.name} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{product?.name}</h2>
+        <h2 className="text-2xl pt-2 font-bold">{product?.name}</h2>
         <p>Brand Name: {product?.brands}</p>
         <p>Type: {product?.types}</p>
         <p>Price: {product?.price}</p>
-        <div className="card-actions justify-between">
+        <div className="flex items-center justify-end text-blue-800">
         <button onClick={() =>{ handleDelete(product?._id)}} className="custom-btn">
             <ImBin></ImBin>
         </button>
@@ -36,21 +36,25 @@ const MyCart = () => {
 
   useEffect(() => {
     axiosPublic.get("/cart")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cart:", error);
+      });
   }, []);
 
 
   const handleDelete=(id)=>{
     console.log('delete',id)
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Are you sure you want to remove the item?',
+        text: "from the cart!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes!'
     }).then((result) => {
         if (result.isConfirmed) {
 
@@ -63,8 +67,8 @@ const MyCart = () => {
                     console.log(data);
                     if (data.deletedCount > 0) {
                         Swal.fire(
-                            'Deleted!',
-                            'Your Coffee has been deleted.',
+                            'Removed!',
+                            'Iteam has been removed.',
                             'success'
                         )
                     }
@@ -79,7 +83,7 @@ const MyCart = () => {
   return (
     <div className="pb-5 pt-24">
       <h2 className="text-3xl font-bold text-center text-red-500 ">My Cart:</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5 container mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-5 container  mx-auto">
       {filteredProducts.length !== 0 ? (
         filteredProducts.map((product) => <ProductCard key={product?._id} product={product} />)
       ) : (

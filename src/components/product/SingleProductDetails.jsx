@@ -19,37 +19,41 @@ const SingleProductDetails = ({product}) => {
             const cart = { photo, name, types, price, brands, email}
             console.log(cart);
 
-            axiosPublic.post(cart)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("added to cart",data);
-                if(data.insertedId){
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Your iteam has been added to your cart.',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
+            axiosPublic.post('/cart',cart)
+            .then((res) => {
+                console.log("added to cart", res.data);
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your item has been added to your cart.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
                 }
-            });
-        };
+              })
+              .catch((error) => {
+                console.error("Error adding to cart:", error);
+              });
+          };
+        
       
     
     return (
         <div>
               <div className='container mx-auto p-4 '> 
         <div className='bannertext'>
-        <img className='rounded mx-auto w-full' src={photo} alt="" />
+        <img className='rounded mx-auto w-40 md:w-96' src={photo} alt="" />
         </div>
 
            <div className="space-y-7 container mx-auto">
            <div className='flex justify-between flex-col md:flex-row items-center'>
            <p className='tex-red-500 font-bold text-3xl mb-6 mt-12'>{name}</p>
 
-            <buttons onClick={() => {handleAddCart(product)}} className='custom-btn cursor-pointer font-bold text-lg  text-white rounded-lg '>
-            Add to Cart 
-            </buttons>
+           <button onClick={() => {handleAddCart(product)}} className='custom-btn cursor-pointer font-bold text-lg hover:text-blue-500 text-blue-400 dark:text-white rounded-lg '>
+    Add to Cart 
+</button>
+
         </div>
             <p className=' font-normal text-base text-[#0B0B0BB2]'>{description}</p>
             <p className='text-base'>Brand: {brands}</p>            
