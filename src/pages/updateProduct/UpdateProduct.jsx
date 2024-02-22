@@ -1,12 +1,12 @@
 import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { useParams } from 'react-router-dom';
-import useAxiosPublic from './../../hooks/useAxiosPublic';
+// import useAxiosPublic from './../../hooks/useAxiosPublic';
 
 const UpdateProduct = () => {
   const { id } = useParams();
   const loadedProduct = useLoaderData();
-  const axiosPublic = useAxiosPublic()
+  // const axiosPublic = useAxiosPublic()
 
   console.log(loadedProduct,id)
 
