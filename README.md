@@ -3,9 +3,10 @@
 
 A online technology & electronics product shop where mongodb used for CRUD operation and firebase for authentication system integrated.
 
-## Live Link
+## Links
 
-[Bytopia](https://.app/)
+[Bytopia Live Link](https://.app/) <br>
+[Bytopia Server Site Code Link](https://github.com/sumaiyasinja/Technology-and-Electronics-E-commerce-server)
 
 
 ## Technologies Used
@@ -28,7 +29,7 @@ A online technology & electronics product shop where mongodb used for CRUD opera
 Clone the project
 
 ```bash
-  git clone [https://github.com/sumaiyasinja/Technology-and-Electronics-E-commerce-client.git](https://github.com/sumaiyasinja/Technology-and-Electronics-E-commerce-client.git)
+  git clone https://github.com/sumaiyasinja/Technology-and-Electronics-E-commerce-client.git
 ```
 
 Go to the project directory
@@ -50,4 +51,4 @@ Start the server
 ```
 
 ## Author
-[@sumaiyasinja](https://github.com/sumaiyasinja)
+[Sumaiya Sinja](https://github.com/sumaiyasinja)
